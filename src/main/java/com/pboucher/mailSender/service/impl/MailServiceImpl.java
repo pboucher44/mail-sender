@@ -52,10 +52,10 @@ public class MailServiceImpl implements MailService {
 
         for (int i = 0; i < contacts.size(); i++) {
             if (oldContact.get(i) == contacts.get(i)) {
-                if (i < contacts.size()) {
+                if (i < contacts.size()-1) {
                     contacts.set(i, save.get(i+1));
                     contacts.set(i+1, save.get(i));
-                } else if (i == contacts.size()) {
+                } else if (i == contacts.size()-1) {
                     contacts.set(i, save.get(0));
                     contacts.set(0, save.get(i));
                 }
