@@ -15,11 +15,11 @@ public class MailController {
     @Resource
     private MailService mailService;
 
-    @RequestMapping(value="/contacts", method = RequestMethod.POST)
+    @RequestMapping(value="/contacts/{montant}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity contacts(@RequestBody List<Contact> contacts) {
+    public ResponseEntity contacts(@PathVariable("montant") int montant, @RequestBody List<Contact> contacts) {
         HashMap<Contact, Contact> shuffleContacts = mailService.shuffleContacts(contacts);
-        mailService.sendSimpleMail(shuffleContacts);
+        mailService.sendSimpleMail(shuffleContacts, montant);
         return ResponseEntity.ok(contacts);
     }
 }
