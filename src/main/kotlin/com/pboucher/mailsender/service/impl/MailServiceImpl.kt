@@ -2,6 +2,7 @@ package com.pboucher.mailsender.service.impl
 
 import com.pboucher.mailsender.metier.Contact
 import com.pboucher.mailsender.service.MailService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.JavaMailSenderImpl
@@ -15,7 +16,8 @@ class MailServiceImpl: MailService {
 
     private val EMAIL_SECRET_SANTA = "secretsanta@pierreboucher.fr"
 
-    private val emailSender: JavaMailSender = JavaMailSenderImpl()
+    @Autowired
+    private lateinit var emailSender: JavaMailSender
 
     override fun sendSimpleMail(contacts: HashMap<Contact, Contact>, montant: Int) {
         for ((key, value) in contacts) {
