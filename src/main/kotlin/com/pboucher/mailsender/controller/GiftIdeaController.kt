@@ -13,18 +13,24 @@ class GiftIdeaController (@Autowired val giftIdeaRepository: GiftIdeaRepository)
 
     @GetMapping
     fun getAllGiftIdea(): ResponseEntity<List<GiftIdea>> {
-        val patients = giftIdeaRepository.findAll()
-        return ResponseEntity.ok(patients)
+        val giftIdea = giftIdeaRepository.findAll()
+        return ResponseEntity.ok(giftIdea)
     }
 
     @PostMapping
-    fun createPatient(@RequestBody request: GiftIdea): ResponseEntity<GiftIdea> {
-        val patient = giftIdeaRepository.save(GiftIdea(
+    fun createGiftIdea(@RequestBody request: GiftIdea): ResponseEntity<GiftIdea> {
+        val giftIdea = giftIdeaRepository.save(GiftIdea(
             id = request.id,
             name = request.name,
             price = request.price,
             image = request.image
         ))
-        return ResponseEntity(patient, HttpStatus.CREATED)
+        return ResponseEntity(giftIdea, HttpStatus.CREATED)
+    }
+
+    @DeleteMapping("/{id}")
+    fun removeGiftIdea(@PathVariable("id") id: String): ResponseEntity<HttpStatus> {
+        giftIdeaRepository.deleteById(id)
+        return ResponseEntity(HttpStatus.OK)
     }
 }
